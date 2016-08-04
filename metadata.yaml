@@ -1,0 +1,32 @@
+_repo: The-Hermit-and-the-Wild-Woman-and-Other-Stories_4533
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Wharton, Edith
+    aliases:
+    - Olivieri, David
+    - Wharton, Edith Newbold Jones
+    birthdate: 1862
+    deathdate: 1937
+    gutenberg_agent_id: '104'
+    url: http://www.gutenberg.org/2009/agents/104
+    wikipedia:
+    - http://fr.wikipedia.org/wiki/Edith_Wharton
+    - http://en.wikipedia.org/wiki/Edith_Wharton
+description: ''
+gutenberg_issued: '2003-10-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4533'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Short stories, American'
+- !lcc 'PS'
+- GITenberg
+tableOfContents: The hermit and the wild woman -- The last asset -- In trust -- The
+  pretext -- The verdict -- The pot-boiler -- The best man.
+title: The Hermit and the Wild Woman, and Other Stories
+url: http://www.gutenberg.org/ebooks/4533
