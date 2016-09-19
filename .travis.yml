@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: w3ytxXQY4PttZhQ+Uujhlejy23CfQwwSILkF9FIR6S+bnvNzxoMZVhP090DNj2KKLJzqh6kS1w2X02SFlHtKAS9M57aSoBSkXgArweX0VNUjOZt8O3eKJX1gOAGkmUcuZKjPTIzWMWWth1If71bv4xEcgqvAHbGJpSyP/CsINgxVdiSa0uZEJZcFbjPD0ty3Ts9uLvEDtgFdWw/Om81/b8SixgMfEI7Kok+DsJVXXj9s2Bvdoe9PLfYhhP4P5f39S1/44cDJYLwGWaVVc4WIoO3RKq5lDR5g2lB222CzJsg8lR+f5Hk3sdRB6fE9bRy/M1RUXG+jTu9gkqCba5xl47WP1UPR3oXfdUeB5wj5toz0UZxywS0YcT0/f5E59AYkztxw6DcOja42qYfgEWwfYAil9x8wu+5sjb2WR5YyjkltBYnVgnoSme1BBhlYqI+ZCS2b5G+CeR4tfNAD6O5IZl7zL63UOUX6hsw91rqO7M0JmDy8TeFdRf9vnqur6uMXDXnoDQddY9lAZibVKnjfNGNmKpRC1GapDL31bDjEeuLnjT8x/cI/ls/deIuB2PYpNmhZwGWOC6rd66VhSnzHAboJWYcge5eW2XS0aOSWlKT7CwwQIK4tlUJ5nTp5orJ4lo/z8smduSPt3gogn4uhL6eeRrNCtkffsKUTM4mhGW4=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-Hermit-and-the-Wild-Woman-and-Other-Stories_4533
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
